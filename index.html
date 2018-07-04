@@ -1,118 +1,146 @@
 
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<style>
-canvas {
-    border:1px solid #d3d3d3;
-    background-color: #f1f1f1;
-}
-</style>
+	<link href='https://fonts.googleapis.com/css?family=Aldrich' rel='stylesheet'>
+    <title>What is this site??</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script>
+	function notset(){
+		alert("아직 안만들었음");
+	}
+	function removeii(){
+		var x=document.getElementsByClassName("ia");
+		for(var i=0;i<x.length;i++){
+			x[i].style.display="none";
+		}
+	}
+	</script>
+	<style>
+		body{
+			margin: 0;
+			background-image: url("https://diotheworld.github.io/image/paper.gif");
+			font-family:Aldrich;
+			font-size: 1.7vw;
+		}
+		.main{
+			font-size: 5vw;
+			color: rgb(21,36,103);
+			text-align: left;
+		}
+		.test{
+			text-decoration: none;
+			border-style: outset;
+			border-color: gray;
+			color: yellow;
+			background: black;
+		}
+		.test:hover{
+			border-style: inset;
+		}
+		div{
+			width: 17%;
+			background-color:yellow;
+			padding-left: 1%;
+			cursor:pointer;
+		}
+		table, th, tr, td{
+			border-collapse: collapse;
+			border: 1px solid black;
+			background-color: white;
+		}
+		td:hover{
+			background-color: #a5a5a5;
+		}
+		a{
+			text-decoration: none;
+		}
+		a:hover{
+			text-decoration: underline;
+		}
+		a#ii{
+			background-color:black;
+		}
+	</style>
 </head>
-<body onload="startGame()">
-<script>
+<body style="background-color:lightgoldenrodyellow">
+	<div onclick="location.href='https://diotheworld.github.io'">
+    <a class="main">SITES</a>
+	<br>
+    <a class="main">BY JH</a>
+	</div>
+	<a class="ia" id="ii" onclick="removeii()"> afd </a><button onclick="removeii()">sf</button>
+	<a class="ia" onclick="removeii()"> afd </a><button onclick="removeii()">sf</button>
+    <center>
+		<input type="text" name="id" /><button onclick="notset()">검색</button><br>
+        <input type="button" onclick="alert('JH의 사이트에 온걸 환영해~^^\n아직 개발중이야 ~ㅇ3ㅇ~');" value="도움말" />
+        <br>
+        <button type="button" onclick="location.href='Login.html'">Login</button>
+		<br>
+        <a href="http://nioting.com/xe/game_souce_XP/225138">RPG 이미지사이트</a>
+		<pre>
+		<a style="letter-spacing: -6px;">http://nioting.com/xe/files/thumbnails/879/235/320x320.crop.jpg</a>
+		▲샘플
+		</pre>
+        <a data-clk="top.ann" href="GameList.html"><img src="https://diotheworld.github.io/image/JHGame.png" width="100" title="게임들 모음"></a>
+		<br>
+		<a href="GameList.html" style="text-decoration: none; color:black; background-color: rgb(111,255,217); border:5px solid rgb(23,161,211);">JH's Game</a>
+        <hr />
+        <a href="https://notepad-plus-plus.org/">notepad</a>
+        <a class="test" href="Test.html">test1</a>
+        <a class="test" href="Test2.html">test2</a>
+        <a class="test" href="Test3.html">test3</a>
+        <a class="test" href="Test4.html">test4</a>
+        <a class="test" href="Test5.html">test5</a>
+        <a class="test" href="Test6.html">test6</a>
+        <a class="test" href="Test7.html">test7</a>
+        <hr />
+        <a href="sites.html">사이트 모음</a>
 
-var myGamePiece;
-
-function startGame() {
-    myGamePiece = new component(30, 30, "image/a.jpg", 10, 120, "image");
-    myGameArea.start();
-}
-
-var myGameArea = {
-    canvas : document.createElement("canvas"),
-    start : function() {
-        this.canvas.width = 1200;
-        this.canvas.height = 800;
-        this.context = this.canvas.getContext("2d");
-        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
-        this.frameNo = 0;
-        this.interval = setInterval(updateGameArea, 20);
-        window.addEventListener('keydown', function (e) {
-            myGameArea.keys = (myGameArea.keys || []);
-            myGameArea.keys[e.keyCode] = (e.type == "keydown");
-        })
-        window.addEventListener('keyup', function (e) {
-            myGameArea.keys[e.keyCode] = (e.type == "keydown");            
-        })
-        },
-    clear : function() {
-        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    },
-    stop : function() {
-        clearInterval(this.interval);
-    }
-}
-
-function component(width, height, color, x, y, type) {
-    this.type = type;
-    if (type == "image") {
-        this.image = new Image();
-        this.image.src = color;
-    }
-    this.width = width;
-    this.height = height;
-    this.speedX = 0;
-    this.speedY = 0;    
-    this.x = x;
-    this.y = y;    
-    this.update = function() {
-        ctx = myGameArea.context;
-        if (type == "image") {
-            ctx.drawImage(this.image, 
-                this.x, 
-                this.y,
-                this.width, this.height);
-        } else {
-            ctx.fillStyle = color;
-            ctx.fillRect(this.x, this.y, this.width, this.height);
-        }
-    }
-    this.newPos = function() {
-        this.x += this.speedX;
-        this.y += this.speedY;        
-    }
-}
-
-function updateGameArea() {
-    myGameArea.clear();
-    myGamePiece.speedX = 0;
-    myGamePiece.speedY = 0;    
-    if (myGameArea.keys && myGameArea.keys[37]) {myGamePiece.speedX = -1; }
-    if (myGameArea.keys && myGameArea.keys[39]) {myGamePiece.speedX = 1; }
-    if (myGameArea.keys && myGameArea.keys[38]) {myGamePiece.speedY = -1; }
-    if (myGameArea.keys && myGameArea.keys[40]) {myGamePiece.speedY = 1; }
-    myGamePiece.newPos();    
-    myGamePiece.update();
-}
-
-function moveup() {
-    myGamePiece.speedY = -1; 
-}
-
-function movedown() {
-    myGamePiece.speedY = 1; 
-}
-
-function moveleft() {
-    myGamePiece.speedX = -1; 
-}
-
-function moveright() {
-    myGamePiece.speedX = 1; 
-}
-
-function clearmove() {
-    myGamePiece.speedX = 0; 
-    myGamePiece.speedY = 0; 
-}
-</script>
-<div style="text-align:center;width:480px;">
-  <button onmousedown="moveup()" onmouseup="clearmove()" ontouchstart="moveup()">UP</button><br><br>
-  <button onmousedown="moveleft()" onmouseup="clearmove()" ontouchstart="moveleft()">LEFT</button>
-  <button onmousedown="moveright()" onmouseup="clearmove()" ontouchstart="moveright()">RIGHT</button><br><br>
-  <button onmousedown="movedown()" onmouseup="clearmove()" ontouchstart="movedown()">DOWN</button>
-</div>
-
-</body>
+        <p style="font-family:Aldrich; color:tomato">https://www.w3schools.com/howto/howto_google_fonts.asp</p>
+        <a href="Answer.html">처형인들 8가지 모자 문제</a>
+    </center>
+    <center>
+        <table style="font-size:2vw">
+            <tbody>
+                <tr>
+                    <th><del>이것들은 문제들</del></th>
+                    <th><del>너는 이것들을 과연 어디까지 풀 수 있을까?</del></th>
+                </tr>
+                <tr>
+                    <td> <a href="Problem1.html">314</a> </td>
+                    <td> <a href="">수학</a> </td>
+                </tr>
+                <tr>
+                    <td> <a style="color:green" href="">암호</a> </td>
+                    <td> <a style="color:blue" href="">상식</a> </td>
+                </tr>
+                <tr>
+                    <td> <a href="">미정</a> </td>
+                    <td> <a href="">미정</a> </td>
+                </tr>
+                <tr>
+                    <td> <a href="">미정</a> </td>
+                    <td> <a style="color:purple" href="">미정</a> </td>
+                </tr>
+                <tr>
+                    <td> <a href="">미정</a> </td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="button">게시판</button>
+    </center>
+    <p id="demo"></p>
+    <button type="button" onclick='document.getElementById("demo").innerHTML="HELLO JAVASCRIPT"'>hello</button>
+    <p id="dio"></p>
+    <button type="button" onclick="f()">감옥학교에서 문지기를</button>
+    <script src="script.js"></script>
+    <a data-clk="top.ann" href="http://blog.naver.com/PostView.nhn?blogId=nitl2000&logNo=152869012"><img src="http://imgnews.naver.com/image/018/2017/04/27/0003811379_001_20170427181403364.jpg" width="50"></a>
+	<a data-clk="top.ann" href="https://pixlr.com/editor/"><img src="http://imgnews.naver.com/image/018/2017/04/27/0003811379_001_20170427181403364.jpg" width="50"></a>
+    <img src="https://diotheworld.github.io/image/JavascriptKeyboard.png" width="700" title="게임들 모음">
+<?php
+$myfile = fopen("/Problem1.html", "r") or die("Unable to open file!");
+echo fread($myfile,filesize("webdictionary.txt"));
+fclose($myfile);
+?>
+    </body>
 </html>
